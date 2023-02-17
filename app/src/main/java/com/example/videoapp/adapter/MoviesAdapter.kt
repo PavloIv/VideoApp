@@ -64,6 +64,8 @@ class MoviesAdapter @Inject() constructor() :
         onItemClickListener = listener
     }
 
+
+
     companion object {
         val differCallback = object : DiffUtil.ItemCallback<MoviesListResponse.Result>() {
             override fun areItemsTheSame(oldItem: MoviesListResponse.Result, newItem: MoviesListResponse.Result): Boolean {

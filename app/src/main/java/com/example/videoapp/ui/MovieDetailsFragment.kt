@@ -23,7 +23,6 @@ class MovieDetailsFragment : Fragment() {
     private val args: MovieDetailsFragmentArgs by navArgs()
     private val viewModel: MoviesViewModel by viewModels()
 
-    val TAG = "MovieDetailsFragment"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
