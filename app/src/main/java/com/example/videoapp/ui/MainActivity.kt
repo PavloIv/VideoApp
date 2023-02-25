@@ -1,6 +1,7 @@
 package com.example.videoapp.ui
 
 import android.os.Bundle
+import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
@@ -20,6 +21,5 @@ class MainActivity : AppCompatActivity() {
 
         navController = Navigation.findNavController(this,R.id.navHost)
         setupWithNavController(binding.bottomNavigationView,navController)
-
     }
 }
