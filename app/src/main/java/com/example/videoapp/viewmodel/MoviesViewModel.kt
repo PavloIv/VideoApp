@@ -6,7 +6,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.cachedIn
-import com.example.videoapp.paging.MoviesCategoryPagingSource
+import com.example.videoapp.paging.MovieCategoryPagingSource
 import com.example.videoapp.paging.MoviesPagingSource
 import com.example.videoapp.paging.MoviesSearchPagingSource
 import com.example.videoapp.repository.ApiRepository
@@ -24,11 +24,12 @@ class MoviesViewModel @Inject constructor(private val repository: ApiRepository)
         MoviesPagingSource(repository)
     }.flow.cachedIn(viewModelScope)
 
-    val moviesCategoryList = Pager(PagingConfig(1)){
-        MoviesCategoryPagingSource(repository)
-    }.flow.cachedIn(viewModelScope)
     fun movieSearchList(query: String) = Pager(PagingConfig(1)){
         MoviesSearchPagingSource(repository,query)
+    }.flow.cachedIn(viewModelScope)
+
+    fun moviesCategoryList(category: String) = Pager(PagingConfig(1)){
+        MovieCategoryPagingSource(repository,category)
     }.flow.cachedIn(viewModelScope)
 
 
