@@ -7,33 +7,14 @@
     android:background="#AEBDCA"
     tools:context=".ui.CategoryFragment">
 
-    <Spinner
-        android:id="@+id/categorySpinner"
-        android:layout_width="390dp"
-        android:layout_height="48sp"
-        android:layout_marginStart="10sp"
-        android:layout_marginTop="5sp"
-        android:layout_marginEnd="10sp"
-        android:autofillHints="category"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.015"
-        tools:ignore="SpeakableTextPresentCheck" />
-
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rlMovies"
         android:layout_width="match_parent"
-        android:layout_height="745sp"
-        android:layout_marginTop="10dp"
+        android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/categorySpinner"
         app:layout_constraintVertical_bias="0.243" />
 
     <ProgressBar

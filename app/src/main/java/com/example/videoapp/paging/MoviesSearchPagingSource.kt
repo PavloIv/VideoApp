@@ -28,9 +28,7 @@ class MoviesSearchPagingSource(
         } catch (exception: HttpException) {
             LoadResult.Error(exception)
         }
-
     }
-
 
     override fun getRefreshKey(state: PagingState<Int, MoviesListResponse.Result>): Int? {
         return null

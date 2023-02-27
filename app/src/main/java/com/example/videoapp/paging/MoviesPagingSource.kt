@@ -31,10 +31,7 @@ class MoviesPagingSource(
 
     }
 
-
     override fun getRefreshKey(state: PagingState<Int, MoviesListResponse.Result>): Int? {
         return null
     }
-
-
 }

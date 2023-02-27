@@ -41,6 +41,7 @@ class MoviesSearchFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         binding.apply {
             val movieName: String = args.movieName
             if (movieName.isNotEmpty()) {
@@ -65,7 +66,6 @@ class MoviesSearchFragment : Fragment() {
                     prgBarMovies.isVisible = state is LoadState.Loading
                 }
             }
-
 
             rlMovies.apply {
                 layoutManager = LinearLayoutManager(requireContext())
