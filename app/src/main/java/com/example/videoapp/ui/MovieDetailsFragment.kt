@@ -19,10 +19,12 @@ import dagger.hilt.android.AndroidEntryPoint
 class MovieDetailsFragment : Fragment() {
 
     private lateinit var binding: FragmentMovieDetailsBinding
-    private var movieId = 0
-    private val args: MovieDetailsFragmentArgs by navArgs()
-    private val viewModel: MoviesViewModel by viewModels()
 
+    private var movieId = 0
+
+    private val args: MovieDetailsFragmentArgs by navArgs()
+
+    private val viewModel: MoviesViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -76,5 +78,4 @@ class MovieDetailsFragment : Fragment() {
             }
         }
     }
-
 }

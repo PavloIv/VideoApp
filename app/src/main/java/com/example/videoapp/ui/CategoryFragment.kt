@@ -14,54 +14,51 @@ import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.videoapp.adapter.LoadMoreAdapter
 import com.example.videoapp.adapter.MoviesAdapter
-import com.example.videoapp.databinding.FragmentMoviesSearchBinding
+import com.example.videoapp.databinding.FragmentCategoryBinding
 import com.example.videoapp.viewmodel.MoviesViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class MoviesSearchFragment : Fragment() {
+class CategoryFragment : Fragment() {
 
-    private lateinit var binding: FragmentMoviesSearchBinding
+    private lateinit var binding: FragmentCategoryBinding
 
     @Inject
     lateinit var moviesAdapter: MoviesAdapter
 
     private val viewModel: MoviesViewModel by viewModels()
 
-    private val args: MoviesSearchFragmentArgs by navArgs()
+    private val args: CategoryFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentMoviesSearchBinding.inflate(layoutInflater, container, false)
+        binding = FragmentCategoryBinding.inflate(layoutInflater,container,false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val categoryNumber: String = convertCategoryToNumber(args.movieCategory)
+
         binding.apply {
-            val movieName: String = args.movieName
-            if (movieName.isNotEmpty()) {
-                lifecycleScope.launchWhenCreated {
-                    viewModel.movieSearchList(movieName).collect {
-                        moviesAdapter.submitData(it)
-                    }
+            lifecycleScope.launchWhenCreated {
+                viewModel.moviesCategoryList(categoryNumber).collect {
+                    moviesAdapter.submitData(it)
                 }
             }
 
             moviesAdapter.setOnItemClickListener {
-                val direction =
-                    MoviesSearchFragmentDirections.actionMoviesSearchFragmentToMovieDetailsFragment(
-                        it.id
-                    )
+                val direction = CategoryFragmentDirections
+                    .actionCategoryFragmentToMovieDetailsFragment(it.id)
                 findNavController().navigate(direction)
             }
 
             lifecycleScope.launchWhenCreated {
-                moviesAdapter.loadStateFlow.collect {
+                moviesAdapter.loadStateFlow.collect{
                     val state = it.refresh
                     prgBarMovies.isVisible = state is LoadState.Loading
                 }
@@ -72,11 +69,36 @@ class MoviesSearchFragment : Fragment() {
                 adapter = moviesAdapter
             }
 
-            rlMovies.adapter = moviesAdapter.withLoadStateFooter(
-                LoadMoreAdapter {
+            rlMovies.adapter=moviesAdapter.withLoadStateFooter(
+                LoadMoreAdapter{
                     moviesAdapter.retry()
                 }
             )
         }
+    }
+
+    private fun convertCategoryToNumber(category: String): String {
+        when(category){
+            "Action" -> return "28"
+            "Adventure" -> return "12"
+            "Animation" -> return "16"
+            "Comedy" -> return "35"
+            "Crime" -> return "80"
+            "Documentary" -> return "99"
+            "Drama" -> return "18"
+            "Family" -> return "10751"
+            "Fantasy" -> return "14"
+            "Western" -> return "37"
+            "History" -> return "36"
+            "Horror" -> return "27"
+            "Music" -> return "10402"
+            "Mystery" -> return "9648"
+            "Romance" -> return "10749"
+            "Science" -> return "878"
+            "TV Movie" -> return "10770"
+            "Thriller" -> return "53"
+            " War" -> return "10752"
+        }
+        return ""
     }
 }

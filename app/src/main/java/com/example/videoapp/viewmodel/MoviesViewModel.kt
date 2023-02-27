@@ -6,11 +6,11 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.cachedIn
+import com.example.videoapp.paging.MovieCategoryPagingSource
 import com.example.videoapp.paging.MoviesPagingSource
 import com.example.videoapp.paging.MoviesSearchPagingSource
 import com.example.videoapp.repository.ApiRepository
 import com.example.videoapp.response.MovieDetailsResponse
-import com.example.videoapp.response.MoviesListResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -28,8 +28,11 @@ class MoviesViewModel @Inject constructor(private val repository: ApiRepository)
         MoviesSearchPagingSource(repository,query)
     }.flow.cachedIn(viewModelScope)
 
+    fun moviesCategoryList(category: String) = Pager(PagingConfig(1)){
+        MovieCategoryPagingSource(repository,category)
+    }.flow.cachedIn(viewModelScope)
 
-    //Api
+
     val detailsMovie = MutableLiveData<MovieDetailsResponse>()
 
 

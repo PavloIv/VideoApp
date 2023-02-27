@@ -19,6 +19,7 @@ class MoviesAdapter @Inject() constructor() :
     PagingDataAdapter<MoviesListResponse.Result, MoviesAdapter.ViewHolder>(differCallback) {
 
     private lateinit var binding: ItemMoviesBinding
+
     private lateinit var context: Context
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -34,7 +35,6 @@ class MoviesAdapter @Inject() constructor() :
     }
 
     inner class ViewHolder : RecyclerView.ViewHolder(binding.root) {
-
         @SuppressLint("SetTextI18n")
         fun bind(item: MoviesListResponse.Result) {
             binding.apply {
@@ -64,18 +64,14 @@ class MoviesAdapter @Inject() constructor() :
         onItemClickListener = listener
     }
 
-
-
     companion object {
         val differCallback = object : DiffUtil.ItemCallback<MoviesListResponse.Result>() {
             override fun areItemsTheSame(oldItem: MoviesListResponse.Result, newItem: MoviesListResponse.Result): Boolean {
                 return oldItem.id == oldItem.id
             }
-
             override fun areContentsTheSame(oldItem: MoviesListResponse.Result, newItem: MoviesListResponse.Result): Boolean {
                 return oldItem == newItem
             }
         }
     }
-
 }

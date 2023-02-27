@@ -6,14 +6,14 @@ import com.example.videoapp.repository.ApiRepository
 import com.example.videoapp.response.MoviesListResponse
 import retrofit2.HttpException
 
-class MoviesSearchPagingSource(
+class MovieCategoryPagingSource(
     private val repository: ApiRepository,
-    private val query: String,
+    private val category: String
 ) : PagingSource<Int, MoviesListResponse.Result>() {
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, MoviesListResponse.Result> {
         return try {
             val currentPage = params.key ?: 1
-            val response = repository.getSearchMovieList(query,currentPage)
+            val response = repository.getCategoryMoviesList(currentPage, category)
             val data = response.body()!!.results
             val responseData = mutableListOf<MoviesListResponse.Result>()
             responseData.addAll(data)
